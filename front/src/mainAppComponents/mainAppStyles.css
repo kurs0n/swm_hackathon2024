@@ -16,7 +16,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: #0073e6;
+    background-color: #B3E5FC;
     border-radius: 50%;
     z-index: 0;
     opacity: 0;
@@ -152,3 +152,67 @@
 .floatingUsername p {
     margin: 0;
 }
+
+.markerInfo {
+    padding-top: 5vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    gap: 5vh;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: whitesmoke;
+
+}
+
+.markerName {
+    font-weight: bold;
+}
+
+.photo {
+    border-radius: 25px;
+}
+
+.location {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.location > p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.leftArrow {
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar-transition-enter {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.sidebar-transition-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+}
+
+.sidebar-transition-exit {
+    opacity: 1;
+    transform: translateX(0)
+}
+
+.sidebar-transition-exit-active {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 300ms, transform 300ms;
+}
+
+
+

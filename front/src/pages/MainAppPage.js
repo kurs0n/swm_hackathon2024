@@ -9,6 +9,8 @@ import {MapContainer,TileLayer} from "react-leaflet";
 import { categoriesAtom } from "../mainAppComponents/atoms/MainApp.js";
 import { useSetAtom } from "jotai";
 import FloatingUsername from "../mainAppComponents/FloatingUsername.js";
+import { Marker } from "react-leaflet";
+import { Popup } from "react-leaflet";
 
 function MainAppPage() {
     const setCategories = useSetAtom(categoriesAtom);
@@ -29,14 +31,23 @@ function MainAppPage() {
     }, []);
     const position = [50.0614300, 19.9365800]
 
+    const [selectedMarker, setSelectedMarker] = useState(null);
+
+    const handleMarkerClick = (markerInfo) => {
+        setSelectedMarker(markerInfo);
+    };
+
     return (
         <div className="containerMainApp">
-            <SideBar/>
+            <SideBar selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker}/>
             <MapContainer center={position} zoom={13} scrollWheelZoom={true}>
                 <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+
+                <Marker position={position} eventHandlers={{ click: () => handleMarkerClick('Marker Info or ID') }}>
+                </Marker>
 
              </MapContainer>
             <FloatingUsername/>
