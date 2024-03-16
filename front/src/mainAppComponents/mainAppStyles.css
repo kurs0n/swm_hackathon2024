@@ -49,6 +49,15 @@
     transform: scale(1.1);
 }
 
+.containerLogo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.containerLogo > h1 {
+    font-size: small;
+}
+
 .containerLogoBackground {
     display: flex;
     justify-content: center;
@@ -74,19 +83,24 @@
     z-index: 0;
 }
 
+.containerMainApp {
+    display: flex;
+    flex-direction: row;
+}
+
 .containerOptions {
     padding-top: 10vh;
     height: 50vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-end;
 }
 
 .containerSideBar {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     padding-top: 5vh;
 }

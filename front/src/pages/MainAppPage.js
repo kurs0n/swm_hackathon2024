@@ -16,19 +16,18 @@ function MainAppPage() {
         //         setData(response.data);
         //     });
     }, []);
-    const position = [51.505, -0.09]
+    const position = [50.0614300, 19.9365800]
 
     return (
-        <div>
+        <div className="containerMainApp">
+            <SideBar/>
+            <MapContainer center={position} heigh zoom={13} scrollWheelZoom={false}>
+                <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
 
-                <SideBar/>
-                    <MapContainer center={position} heigh zoom={13} scrollWheelZoom={false}>
-                        <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-
-                     </MapContainer>
+             </MapContainer>
         </div>
     );
 }

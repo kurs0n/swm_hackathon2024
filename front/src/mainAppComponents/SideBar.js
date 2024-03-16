@@ -1,7 +1,6 @@
 import * as React from "react";
 import './mainAppStyles.css';
 import logo from '../graphics/logo.png';
-import calendarIcon from '../graphics/calendar.png';
 import logoutIcon from '../graphics/logout.png'
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
@@ -18,9 +17,14 @@ function SideBar() {
     };
 
     return(
-        <div className="col-md-1 borderRightSide containerSideBar">
-            <div className="containerLogoBackground">
-                <img src={logo} alt="Logo" width={50} height={50}/>
+        <div className="col-md-3 borderRightSide containerSideBar">
+            <div className="containerLogo">
+                <div className="containerLogoBackground">
+                    <img src={logo} alt="Logo" width={50} height={50}/>
+                </div>
+                <div>
+                    <h1>Wietaminki</h1>
+                </div>
             </div>
 
             <div className="containerOptions">
