@@ -24,17 +24,17 @@ function SideBar() {
                 <div className="containerLogoBackground">
                     <img src={logo} alt="Logo" width={50} height={50}/>
                 </div>
-                <div>
-                    <h1>Wietaminki</h1>
+                <div className="companyName">
+                    <h1>KrakVenture</h1>
                 </div>
             </div> 
             <div className="categoriesDiv">
             {
                 categories.map(category=>(
-                    <>
-                        <label>{category}</label>
+                    <div className="category">
                         <input type="checkbox" placeholder={category}/>
-                    </>
+                        <label>{category}</label>
+                    </div>
                 ))
             }
 
