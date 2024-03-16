@@ -1,0 +1,60 @@
+
+.containerFullScreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+.containerColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerLoginForm {
+    background-color: whitesmoke;
+    box-shadow: 0 0 100px 50px rgba(0, 0, 0, 0.2);
+    border-radius: 100px;
+    padding-bottom: 2%;
+    max-width: 40%;
+}
+
+.containerWelcome{
+    padding-top: 5%;
+    padding-bottom: 5%;
+    text-align: center;
+}
+
+.inactive {
+    background-color: #e5e5e5;
+}
+
+.form-label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    width: 100%;
+}
+
+.logoContainer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.logoContainer > p {
+    font-size: xx-large;
+    padding-top: 35px;
+    padding-left: 15px;
+}
+
+.gradientBg {
+    background: radial-gradient(circle, #0073e6, #B3E5FC);
+}
