@@ -1,9 +1,10 @@
 import * as React from "react";
+import { useEffect } from "react";
 import './mainAppStyles.css';
 import logoutIcon from '../graphics/logout.png'
 import {useNavigate} from "react-router-dom";
-import { useAtomValue } from "jotai";
-import { categoriesAtom } from "./atoms/MainApp.js";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { categoriesAtom,checkedCategoriesAtom, markersAtom } from "./atoms/MainApp.js";
 import axios from "axios";
 import dumbbell from '../graphics/dumbbell.png'
 import leftArrow from '../graphics/left-arrow.png'
@@ -14,6 +15,8 @@ import photo from '../photos/orlik.png'
 
 function SideBar({ selectedMarker, setSelectedMarker }) {
     const categories = useAtomValue(categoriesAtom);
+    const setMarkers = useSetAtom(markersAtom);
+    const [checkedCategories,setCheckedCategories] = useAtom(checkedCategoriesAtom);
     const navigate = useNavigate();
 
     const logout = () => {
@@ -23,10 +26,92 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
 
     };
 
-    const handleBackClick = () => {
+    // useEffect(()=>{
+    //     const getCategoriesMarkers = async()=>{
+    //         if(checkedCategories.length){
+    //             let query ="";
+    //             for(let i=0; i<checkedCategories.length; i++){
+    //                 if (i==0){
+    //                     query = `?categories=${checkedCategories[i]}`;
+    //                 }
+    //                 else {
+    //                     query += `&categories=${checkedCategories[i]}`;
+    //                 }
+    //             }
+    //             const res = await axios.get("http://localhost:8080/markers"+query,{
+    //                 headers:{
+    //                     "Content-Type": "applcitation/json"
+    //                 }
+    //             });
+    //             console.log(res.data);
+    //         }
+    //     };
+    //     getCategoriesMarkers();
+    // },[checkedCategories.length]);
+
+    const handleBackClick =async () => {
+        setCheckedCategories([]);
+        const res = await axios.get("http://localhost:8080/markers",{
+            headers:{
+                "Content-Type": "applcitation/json"
+            }
+        });
+        
+        setMarkers(res.data.data);
         setSelectedMarker(null);
     };
 
+    const onClickCheckbox = async(event)=>{
+        const data = checkedCategories;
+
+        if(event.target.checked == true){
+            data.push(event.target.name);
+            setCheckedCategories(data);
+        }
+        else if(event.target.checked == false){
+            const indexToDelete =data.indexOf(event.target.name)
+            data.splice(indexToDelete,1);
+            setCheckedCategories(data);
+        }
+
+        if(data.length){
+            let query ="";
+            for(let i=0; i<checkedCategories.length; i++){
+                if (i==0){
+                    query = `?categories=${checkedCategories[i]}`;
+                }
+                else {
+                    query += `&categories=${checkedCategories[i]}`;
+                }
+            }
+            const res = await axios.get("http://localhost:8080/markers"+query,{
+                headers:{
+                    "Content-Type": "applcitation/json"
+                }
+            });
+            
+            setMarkers(res.data.data);
+        }
+        else { 
+            const res = await axios.get("http://localhost:8080/markers",{
+                headers:{
+                    "Content-Type": "applcitation/json"
+                }
+            });
+            
+            setMarkers(res.data.data);
+        }
+    };
+
+    const checkIfCategoryIsChecked = (category)=>{
+        if(checkedCategories.findIndex(category._id)>=0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    
     return(
         <div className="col-md-3 borderRightSide">
             <CSSTransition
@@ -36,16 +121,16 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
                 unmountOnExit
             >
                     <div className="markerInfo">
-                        <h4 className="markerName">Stowarzyszenie Siemacha - Centrum Rozwoju Com-Com Zone</h4>
+                        <h4 className="markerName">{selectedMarker?.category.name.toUpperCase()[0]+selectedMarker?.category.name.substring(1)}</h4>
                         <img src={photo} alt="photo" className="photo"/>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu lectus vitae tortor iaculis ornare. Sed et mollis justo.</p>
+                        <p>Trenuj!</p>
                         <div className="location">
                             <img src={locationMarker} alt="LocationMarker" width={40} height={40}/>
-                            <p>ul. Ptaszyckiego 6 31-979 Kraków</p>
+                            <p>{selectedMarker?.address}</p>
                         </div>
                         <div className="category">
                             <p>Kategoria:</p>
-                            <p>Piłka nożna</p>
+                            <p>{selectedMarker?.category.name}</p>
                         </div>
                         <div className="leftArrow">
                         <img src={leftArrow} alt="LeftArrow" width={75} height={75} onClick={handleBackClick}/>
@@ -72,8 +157,8 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
                 {
                     categories.map(category=>(
                         <div className="category">
-                            <input type="checkbox" placeholder={category}/>
-                            <label>{category}</label>
+                            <input type="checkbox" onChange={onClickCheckbox} name={category._id}/>
+                            <label>{category.name}</label>
                         </div>
                     ))
                 }
