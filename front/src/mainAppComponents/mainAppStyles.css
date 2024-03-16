@@ -104,3 +104,8 @@
     align-items: center;
     padding-top: 5vh;
 }
+
+.categoriesDiv {
+    overflow-y: auto;
+    display: grid;
+}

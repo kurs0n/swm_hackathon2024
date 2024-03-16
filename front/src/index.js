@@ -7,6 +7,10 @@ import LoginPage from "./pages/LoginPage.js";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainAppPage from "./pages/MainAppPage.js";
 import NotFoundPage from "./pages/NotFoundPage.js";
+import {DevTools} from "jotai-devtools"; 
+import { createStore, Provider } from 'jotai';
+
+const customStore = createStore();
 
 const router = createBrowserRouter([
     {
@@ -24,7 +28,12 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <RouterProvider router={router}/>
+        <Provider store={customStore} >
+
+            <DevTools/>
+            <RouterProvider router={router}/>
+                        
+        </Provider>
     </React.StrictMode>
 );
 

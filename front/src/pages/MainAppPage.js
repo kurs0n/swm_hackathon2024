@@ -1,20 +1,30 @@
 import * as React from "react";
 import "../index.css"
 // import { request } from '../axios_helper.js';
+import axios from "axios";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import SideBar from "../mainAppComponents/SideBar.js";
 import {MapContainer,TileLayer} from "react-leaflet";
- 
+import { categoriesAtom } from "../mainAppComponents/atoms/MainApp.js";
+import { useSetAtom } from "jotai"; 
+
 function MainAppPage() {
-    const [data, setData] = useState([]);
+    const setCategories = useSetAtom(categoriesAtom);
     const navigate = useNavigate();
 
     useEffect(() => {
-        // request("GET", "/messages", {})
-        //     .then((response) => {
-        //         setData(response.data);
-        //     });
+        const getCategories = async ()=>{
+            const resp = await axios.get("http://localhost:3000/categories.json",{headers: { // fetch it from api!
+                "Content-Type": "application/json"
+            }})
+    
+                    
+            setCategories(resp.data.Categories);
+        };
+
+
+        getCategories();
     }, []);
     const position = [50.0614300, 19.9365800]
 
