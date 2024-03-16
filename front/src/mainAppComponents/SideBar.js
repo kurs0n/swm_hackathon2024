@@ -11,8 +11,6 @@ import leftArrow from '../graphics/left-arrow.png'
 import locationMarker from '../graphics/location.png'
 import { CSSTransition } from 'react-transition-group';
 
-import photo from '../photos/orlik.png'
-
 function SideBar({ selectedMarker, setSelectedMarker }) {
     const categories = useAtomValue(categoriesAtom);
     const setMarkers = useSetAtom(markersAtom);
@@ -60,6 +58,7 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
         setMarkers(res.data.data);
         setSelectedMarker(null);
     };
+
 
     const starAverage = Math.random()
     * (4 - 1 + 1) + 1;
@@ -156,7 +155,8 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
         else {
             return false;
         }
-    };
+    }; 
+    console.log(selectedMarker)
     return(
         <div className="col-md-3 borderRightSide">
             <CSSTransition
@@ -168,7 +168,7 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
                     <div className="markerInfo">
 
                         <h4 className="markerName">{selectedMarker?.category.name.toUpperCase()[0]+selectedMarker?.category.name.substring(1)}</h4>
-                        <img src={photo} alt="photo" className="photo"/>
+                        <img src={`/photos/${selectedMarker?.category.name}.jpeg`} alt="photo" className="photo"/>
                         <p>Trenuj!</p>
                         <div className="rating">
                             {stars}
