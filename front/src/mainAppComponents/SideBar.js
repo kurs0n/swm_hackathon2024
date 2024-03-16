@@ -53,7 +53,7 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
         setCheckedCategories([]);
         const res = await axios.get("http://localhost:8080/markers",{
             headers:{
-                "Content-Type": "applcitation/json"
+                "Content-Type": "application/json"
             }
         });
         
@@ -61,7 +61,8 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
         setSelectedMarker(null);
     };
 
-    const starAverage = 2.7;
+    const starAverage = Math.random()
+    * (4 - 1 + 1) + 1;
 
     const fullStars = Math.floor(starAverage);
     // Gets the number of full stars. starAverage is the rating, for example 
@@ -131,7 +132,7 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
             }
             const res = await axios.get("http://localhost:8080/markers"+query,{
                 headers:{
-                    "Content-Type": "applcitation/json"
+                    "Content-Type": "application/json"
                 }
             });
             
@@ -140,7 +141,7 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
         else { 
             const res = await axios.get("http://localhost:8080/markers",{
                 headers:{
-                    "Content-Type": "applcitation/json"
+                    "Content-Type": "application/json"
                 }
             });
             
@@ -149,7 +150,7 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
     };
 
     const checkIfCategoryIsChecked = (category)=>{
-        if(checkedCategories.findIndex(category._id)>=0){
+        if(checkedCategories.findIndex(category._id)>=0){ 
             return true;
         }
         else {
@@ -169,6 +170,10 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
                         <h4 className="markerName">{selectedMarker?.category.name.toUpperCase()[0]+selectedMarker?.category.name.substring(1)}</h4>
                         <img src={photo} alt="photo" className="photo"/>
                         <p>Trenuj!</p>
+                        <div className="rating">
+                            {stars}
+                        </div>
+                        <p style={{fontSize: "20px", marginTop: "10px", textAlign: 'center',fontWeight: 'bold'}}>{starAverage.toFixed(1)}</p>
                         <div className="location">
                             <img src={locationMarker} alt="LocationMarker" width={40} height={40}/>
                             <p>{selectedMarker?.address}</p>
