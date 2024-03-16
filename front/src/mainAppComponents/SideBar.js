@@ -8,6 +8,7 @@ import axios from "axios";
 import dumbbell from '../graphics/dumbbell.png'
 import leftArrow from '../graphics/left-arrow.png'
 import locationMarker from '../graphics/location.png'
+import { CSSTransition } from 'react-transition-group';
 
 import photo from '../photos/orlik.png'
 
@@ -28,7 +29,12 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
 
     return(
         <div className="col-md-3 borderRightSide">
-            {selectedMarker ? (
+            <CSSTransition
+                in={selectedMarker != null}
+                timeout={300}
+                classNames="sidebar-transition"
+                unmountOnExit
+            >
                     <div className="markerInfo">
                         <h4 className="markerName">Stowarzyszenie Siemacha - Centrum Rozwoju Com-Com Zone</h4>
                         <img src={photo} alt="photo" className="photo"/>
@@ -45,7 +51,14 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
                         <img src={leftArrow} alt="LeftArrow" width={75} height={75} onClick={handleBackClick}/>
                         </div>
                     </div>
-                ) : (
+            </CSSTransition>
+
+            <CSSTransition
+                in={selectedMarker == null}
+                timeout={300}
+                classNames="sidebar-transition"
+                unmountOnExit
+            >
             <div className="containerSideBar">
                 <div className="containerLogo">
                     <div className="containerLogoBackground">
@@ -72,7 +85,7 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
                     </div>
                 </div>
             </div>
-                )}
+            </CSSTransition>
         </div>
     );
 }
