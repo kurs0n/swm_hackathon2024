@@ -7,7 +7,8 @@ import {useNavigate} from "react-router-dom";
 import SideBar from "../mainAppComponents/SideBar.js";
 import {MapContainer,TileLayer} from "react-leaflet";
 import { categoriesAtom } from "../mainAppComponents/atoms/MainApp.js";
-import { useSetAtom } from "jotai"; 
+import { useSetAtom } from "jotai";
+import FloatingUsername from "../mainAppComponents/FloatingUsername.js";
 
 function MainAppPage() {
     const setCategories = useSetAtom(categoriesAtom);
@@ -31,13 +32,14 @@ function MainAppPage() {
     return (
         <div className="containerMainApp">
             <SideBar/>
-            <MapContainer center={position} heigh zoom={13} scrollWheelZoom={false}>
+            <MapContainer center={position} zoom={13} scrollWheelZoom={true}>
                 <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
 
              </MapContainer>
+            <FloatingUsername/>
         </div>
     );
 }

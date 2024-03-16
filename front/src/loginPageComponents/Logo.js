@@ -1,5 +1,5 @@
 import * as React from "react";
-import logo from '../graphics/logo.png';
+import dumbbell from '../graphics/dumbbell.png'
 import './loginPageStyles.css';
 
 function Logo() {
@@ -7,8 +7,10 @@ function Logo() {
     return(
             <div className="containerColumn">
                 <div className="logoContainer">
-                    <img src={logo} alt="Logo" width={100} height={100}/>
-                    <p className="display-4">Multiuser Task Manager</p>
+                    <div className="logoImage">
+                        <img src={dumbbell} alt="Logo" width={50} height={50}/>
+                    </div>
+                        <h1>KrakVenture</h1>
                 </div>
             </div>
     );

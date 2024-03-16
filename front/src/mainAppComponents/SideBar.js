@@ -1,11 +1,11 @@
 import * as React from "react";
 import './mainAppStyles.css';
-import logo from '../graphics/logo.png';
 import logoutIcon from '../graphics/logout.png'
 import {useNavigate} from "react-router-dom";
 import { useAtomValue } from "jotai";
 import { categoriesAtom } from "./atoms/MainApp.js";
 import axios from "axios";
+import dumbbell from '../graphics/dumbbell.png'
 
 function SideBar() {
     const categories = useAtomValue(categoriesAtom);
@@ -22,7 +22,7 @@ function SideBar() {
         <div className="col-md-3 borderRightSide containerSideBar">
             <div className="containerLogo">
                 <div className="containerLogoBackground">
-                    <img src={logo} alt="Logo" width={50} height={50}/>
+                    <img src={dumbbell} alt="Logo" width={50} height={50}/>
                 </div>
                 <div className="companyName">
                     <h1>KrakVenture</h1>
