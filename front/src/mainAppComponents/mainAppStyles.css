@@ -177,6 +177,7 @@
     height: 50px;
     margin-right: 2px;
     vertical-align: middle;
+    border-radius: 25px;
 }
 
 .rating_div {

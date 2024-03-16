@@ -27,7 +27,7 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
         setSelectedMarker(null);
     };
 
-    const starAverage = 3.7;
+    const starAverage = 2.7;
 
     const fullStars = Math.floor(starAverage);
     // Gets the number of full stars. starAverage is the rating, for example 
@@ -66,8 +66,8 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
     const stars = starArr.map((val, i) => {
     return <div key={i} 
         className="starBox" 
-        style={{background: `linear-gradient(90deg, rgba(11,99,229,255) 
-        ${val * 100}%, #bbbac0 ${val * 100}%)`, color: 'white', fontSize: '30px'}}>★</div>
+        style={{background: `linear-gradient(90deg, rgb(140,188,244) 
+        ${val * 100}%, #848484 ${val * 100}%)`, color: 'white', fontSize: '30px'}}><img src={dumbbell} width={35} height={35}/></div>
     })
     // This last block is explained in the following paragraphs below
 
@@ -87,7 +87,7 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu lectus vitae tortor iaculis ornare. Sed et mollis justo.</p>
                         <div class="rating">
                             {stars}
-                            <p style={{fontSize: "20px", }}><b>3.7</b></p>
+                            <p style={{fontSize: "20px", marginTop: "10px" }}><b>3.7</b></p>
                         </div>
                         <div className="location">
                             <img src={locationMarker} alt="LocationMarker" width={40} height={40}/>
