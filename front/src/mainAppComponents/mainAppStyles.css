@@ -170,6 +170,35 @@
     font-weight: bold;
 }
 
+.starBox {
+    display: inline-block;
+    border-color: rgb(235, 235, 235);
+    width: 50px;
+    height: 50px;
+    margin-right: 2px;
+    vertical-align: middle;
+    border-radius: 25px;
+}
+
+.rating_div {
+    align-self: center;
+    justify-content: center;
+}
+
+.rating {
+    display: inline-block;
+    margin: 0 10px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.dumbells {
+    width: calc(var(--rating) * 20%); /* Szerokość gwiazdki zależy od oceny */
+    background-image: url('../graphics/dumbells.png'); /* Obraz gwiazdek */
+    background-size: contain; /* Dopasowanie obrazu do rozmiaru */
+  }
+
 .photo {
     border-radius: 25px;
 }
@@ -213,6 +242,3 @@
     transform: translateX(100%);
     transition: opacity 300ms, transform 300ms;
 }
-
-
-
