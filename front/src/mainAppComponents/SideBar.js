@@ -53,13 +53,59 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
         setCheckedCategories([]);
         const res = await axios.get("http://localhost:8080/markers",{
             headers:{
-                "Content-Type": "applcitation/json"
+                "Content-Type": "application/json"
             }
         });
         
         setMarkers(res.data.data);
         setSelectedMarker(null);
     };
+
+    const starAverage = Math.random()
+    * (4 - 1 + 1) + 1;
+
+    const fullStars = Math.floor(starAverage);
+    // Gets the number of full stars. starAverage is the rating, for example 
+    // if the rating were 4.3, fullStars would now be 4.
+
+    const starArr = [];
+    // Create an empty array. We will add 1s, 0s, and a decimal value for the 
+    // partial star.
+
+    for(let i = 1; i <= fullStars; i++)
+    {
+    starArr.push(1);
+    }
+    // This adds a 1 to the array for each full star in our rating
+
+    if(starAverage < 5) {
+    // Wrapped in an if block because the following only needs to occur if 
+    // it's not a full 5.
+
+    const partialStar = starAverage - fullStars;
+        // Calculates the partial star. For example 4.3 - 4 = 0.3. 0.3 will get 
+        // added to the array in the next line to represent the partial star
+
+    starArr.push(partialStar);
+        // Adds the partial star to the array
+
+    const emptyStars = 5 - starArr.length;
+        // Calculates the number of empty stars
+
+    for(let i=1; i<=emptyStars; i++) {
+        starArr.push(0);
+    }
+        // This for loop adds 0s to the array to represent empty stars
+    }
+
+    const stars = starArr.map((val, i) => {
+    return <div key={i} 
+        className="starBox" 
+        style={{background: `linear-gradient(90deg, rgb(140,188,244) 
+        ${val * 100}%, #848484 ${val * 100}%)`, color: 'white', fontSize: '30px'}}><img src={dumbbell} width={35} height={35}/></div>
+    })
+    // This last block is explained in the following paragraphs below
+
 
     const onClickCheckbox = async(event)=>{
         const data = checkedCategories;
@@ -86,7 +132,7 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
             }
             const res = await axios.get("http://localhost:8080/markers"+query,{
                 headers:{
-                    "Content-Type": "applcitation/json"
+                    "Content-Type": "application/json"
                 }
             });
             
@@ -95,7 +141,7 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
         else { 
             const res = await axios.get("http://localhost:8080/markers",{
                 headers:{
-                    "Content-Type": "applcitation/json"
+                    "Content-Type": "application/json"
                 }
             });
             
@@ -104,14 +150,13 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
     };
 
     const checkIfCategoryIsChecked = (category)=>{
-        if(checkedCategories.findIndex(category._id)>=0){
+        if(checkedCategories.findIndex(category._id)>=0){ 
             return true;
         }
         else {
             return false;
         }
     };
-    
     return(
         <div className="col-md-3 borderRightSide">
             <CSSTransition
@@ -121,9 +166,14 @@ function SideBar({ selectedMarker, setSelectedMarker }) {
                 unmountOnExit
             >
                     <div className="markerInfo">
+
                         <h4 className="markerName">{selectedMarker?.category.name.toUpperCase()[0]+selectedMarker?.category.name.substring(1)}</h4>
                         <img src={photo} alt="photo" className="photo"/>
                         <p>Trenuj!</p>
+                        <div className="rating">
+                            {stars}
+                        </div>
+                        <p style={{fontSize: "20px", marginTop: "10px", textAlign: 'center',fontWeight: 'bold'}}>{starAverage.toFixed(1)}</p>
                         <div className="location">
                             <img src={locationMarker} alt="LocationMarker" width={40} height={40}/>
                             <p>{selectedMarker?.address}</p>
